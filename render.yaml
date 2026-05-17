@@ -1,0 +1,8 @@
+services:
+  - type: static
+    name: invitation
+    env: static
+    plan: free
+    branch: main
+    buildCommand: npm ci && npm run build
+    staticPublishPath: dist

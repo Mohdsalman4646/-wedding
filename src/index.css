@@ -1,0 +1,203 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Playfair+Display:wght@400;600;700;900&family=Great+Vibes&family=Tangerine:wght@400;700&family=Cormorant+Garamond:wght@400;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #0a0a0a;
+  color: #f5f5f0;
+  font-family: 'Cormorant Garamond', serif;
+  overflow-x: hidden;
+  margin: 0;
+}
+
+#root {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Remove default scrollbar and create custom one */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(95, 76, 12, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgb(95, 76, 12), rgb(95, 76, 12));
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgb(95, 76, 12), rgb(95, 76, 12));
+}
+
+/* Gold gradient text */
+.text-gold-gradient {
+  background: linear-gradient(135deg, rgb(95, 76, 12), rgb(95, 76, 12));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glassmorphism effect */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(95, 76, 12, 0.2);
+}
+
+.glass-gold {
+  background: rgba(95, 76, 12, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(95, 76, 12, 0.3);
+}
+
+/* Gold glow effects */
+.gold-glow {
+  box-shadow: 0 0 20px rgba(95, 76, 12, 0.3), inset 0 0 20px rgba(95, 76, 12, 0.1);
+}
+
+.gold-glow-lg {
+  box-shadow: 0 0 40px rgba(95, 76, 12, 0.4), inset 0 0 40px rgba(95, 76, 12, 0.15);
+}
+
+/* Shimmer effect */
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(95, 76, 12, 0) 0%,
+    rgba(95, 76, 12, 0.2) 50%,
+    rgba(95, 76, 12, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite;
+}
+
+/* Floating particles */
+.particle {
+  position: fixed;
+  width: 2px;
+  height: 2px;
+  background: rgba(241, 196, 45, 0.8);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* Custom cursor */
+body {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="3" fill="%235f4c0c"/></svg>') 16 16, auto;
+}
+
+/* Smooth transitions */
+button, a {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Gold border glow on hover */
+.gold-border-glow {
+  border: 1px solid rgba(95, 76, 12, 0.5);
+  transition: all 0.3s ease;
+}
+
+.gold-border-glow:hover {
+  border-color: rgb(95, 76, 12);
+  box-shadow: 0 0 20px rgba(95, 76, 12, 0.4);
+}
+
+/* Text shadows for luxury look */
+.text-shadow-gold {
+  text-shadow: 0 0 20px rgba(95, 76, 12, 0.5);
+}
+
+.text-shadow-lg {
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+}
+
+/* Crystal shine effect */
+.crystal-shine {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.3) 0%,
+    rgba(95, 76, 12, 0.6) 50%,
+    rgba(255, 255, 255, 0.3) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% 200%;
+  animation: crystal-shimmer 3s ease-in-out infinite;
+}
+
+@keyframes crystal-shimmer {
+  0%, 100% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+}
+
+/* Smooth scroll snap */
+.scroll-smooth {
+  scroll-behavior: smooth;
+}
+
+/* Full viewport sections */
+.section-full {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Simple entrance and floating animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 700ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes floatUpDown {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+
+.float-slow {
+  animation: floatUpDown 6s ease-in-out infinite;
+}
+
+/* Slight slow pulse for decorative heading */
+@keyframes pulse-slow {
+  0% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.92; transform: scale(0.995); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.pulse-slow {
+  animation: pulse-slow 4s ease-in-out infinite;
+}
