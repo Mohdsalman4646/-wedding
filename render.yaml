@@ -3,6 +3,6 @@ services:
     name: invitation
     env: static
     plan: free
-    branch: main
+    branch: master
     buildCommand: npm ci && npm run build
     staticPublishPath: dist
