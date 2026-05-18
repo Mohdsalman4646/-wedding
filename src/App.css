@@ -646,10 +646,9 @@ body {
   letter-spacing: 0.5px;
 }
 
+  .nikah-venue-address {
   color: #ffffff;
-.nikah-venue-address {
   font-size: 13px;
-  line-height: 1.6;
 }
 
 /* Blessings section */
