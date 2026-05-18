@@ -3,18 +3,25 @@ import ParticleBackground from './components/ParticleBackground';
 import './App.css';
 
 function App() {
+
   const [guestName, setGuestName] = useState('');
   const [showInvitation, setShowInvitation] = useState(false);
-  const [curtainOpen, setCurtainOpen] = useState(false);
   const [welcomeLeaving, setWelcomeLeaving] = useState(false);
+  const [curtainOpen, setCurtainOpen] = useState(false);
   const [muted, setMuted] = useState(false);
 
   const audioRef = useRef(null);
 
-  // Initialize audio
+  // =========================
+  // AUDIO
+  // =========================
+
   useEffect(() => {
+
     audioRef.current = new Audio('/MUSIC.mp3');
+
     audioRef.current.loop = true;
+
     audioRef.current.volume = 0.8;
 
     return () => {
@@ -22,69 +29,102 @@ function App() {
         audioRef.current.pause();
       }
     };
+
   }, []);
 
-  // Handle Enter
+  // =========================
+  // ENTER BUTTON
+  // =========================
+
   const handleEnter = () => {
-    if (guestName.trim()) {
 
-      // Start music only after button click
-      if (!muted && audioRef.current) {
-        audioRef.current.play().catch((err) => {
-          console.log('Audio playback blocked:', err);
-        });
-      }
+    if (!guestName.trim()) return;
 
-      // Welcome animation
-      setWelcomeLeaving(true);
+    // Start music
+    if (!muted && audioRef.current) {
 
-      setTimeout(() => {
-        setShowInvitation(true);
-        setWelcomeLeaving(false);
-      }, 900);
+      audioRef.current.play().catch((err) => {
+        console.log(err);
+      });
+
     }
+
+    // Close welcome screen
+    setWelcomeLeaving(true);
+
+    // Show invitation
+    setTimeout(() => {
+
+      setShowInvitation(true);
+
+      // Open curtains after invitation mounts
+      setTimeout(() => {
+        setCurtainOpen(true);
+      }, 200);
+
+    }, 1000);
+
   };
 
-  // Handle Enter key
+  // =========================
+  // ENTER KEY
+  // =========================
+
   const handleKeyPress = (e) => {
+
     if (e.key === 'Enter') {
       handleEnter();
     }
+
   };
 
-  // Curtain animation
-  useEffect(() => {
-    if (showInvitation) {
-      const t = setTimeout(() => setCurtainOpen(true), 60);
-      return () => clearTimeout(t);
-    } else {
-      setCurtainOpen(false);
-    }
-  }, [showInvitation]);
+  // =========================
+  // MUTE / UNMUTE
+  // =========================
 
-  // Mute / Unmute
   useEffect(() => {
+
     if (!audioRef.current) return;
 
     if (muted) {
+
       audioRef.current.pause();
+
     } else {
+
       if (showInvitation) {
+
         audioRef.current.play().catch(() => {});
+
       }
+
     }
+
   }, [muted, showInvitation]);
 
+  // =========================
+  // JSX
+  // =========================
+
   return (
-    <div className="min-h-screen bg-dark-navy relative overflow-hidden">
+
+    <div className="app-container">
+
       <ParticleBackground />
 
       {!showInvitation ? (
-        // Welcome Screen
+
+        // =========================
+        // WELCOME SCREEN
+        // =========================
+
         <div className={`welcome-screen ${welcomeLeaving ? 'closing-vertical' : ''}`}>
+
           <div className="welcome-container">
 
-            <div className="bismillah-welcome">بِسْمِ اللَّهِ</div>
+            <div className="bismillah-welcome">
+              بِسْمِ اللَّهِ
+            </div>
 
             <h1 className="welcome-heading">
               You Are Invited
@@ -98,7 +138,9 @@ function App() {
 
               <div className="input-container">
 
-                <span className="search-icon">🔍</span>
+                <span className="search-icon">
+                  🔍
+                </span>
 
                 <input
                   type="text"
@@ -119,21 +161,28 @@ function App() {
               </button>
 
             </div>
+
           </div>
+
         </div>
+
       ) : (
 
-        // Invitation Screen
+        // =========================
+        // INVITATION SCREEN
+        // =========================
+
         <div className="invitation-screen">
 
           {/* Curtains */}
+
           <div className={`curtain left ${curtainOpen ? 'opened' : ''}`}></div>
+
           <div className={`curtain right ${curtainOpen ? 'opened' : ''}`}></div>
 
-          {/* Main Invitation */}
-          <div className={`invitation-card ${showInvitation ? 'open-vertical' : ''}`}>
+          {/* Invitation */}
 
-            <div className="top-border-ornament"></div>
+          <div className={`invitation-card ${curtainOpen ? 'open-vertical' : ''}`}>
 
             <div className="full-bismillah">
               بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
@@ -185,7 +234,9 @@ function App() {
               MBA, Working as DC in KSA
             </p>
 
-            <p className="with-text">With</p>
+            <p className="with-text">
+              With
+            </p>
 
             <p className="daughter-text">
               Daughter of
@@ -203,7 +254,10 @@ function App() {
               In Sha Allah
             </p>
 
+            {/* Date */}
+
             <div className="date-section">
+
               <div className="date-row">
 
                 <span className="date-left">
@@ -211,9 +265,11 @@ function App() {
                 </span>
 
                 <div className="date-box">
+
                   <span className="date-day-large">
                     03RD
                   </span>
+
                 </div>
 
                 <span className="date-right">
@@ -221,6 +277,7 @@ function App() {
                 </span>
 
               </div>
+
             </div>
 
             <p className="hijri-date">
@@ -234,23 +291,25 @@ function App() {
             <div className="date-separator"></div>
 
             {/* Venue */}
-            <div className="event-box valima-box">
+
+            <div className="event-box">
 
               <p className="venue-location">
-                At : WHITE PALACE,
+                At : WHITE PALACE
               </p>
 
               <p className="venue-location">
-                Near Moghal Engineering College,
+                Near Moghal Engineering College
               </p>
 
               <p className="venue-location">
-                Opp. Maheshwari Oil Mill, Bandlaguda, Hyd.
+                Bandlaguda, Hyderabad
               </p>
 
             </div>
 
             {/* Nikah */}
+
             <div className="event-box nikah-box">
 
               <h3 className="nikah-title">
@@ -260,11 +319,11 @@ function App() {
               <div className="nikah-date-section">
 
                 <span className="nikah-date-text">
-                  On Monday,
+                  On Monday
                 </span>
 
                 <span className="nikah-date-day">
-                  1st. June 2026
+                  1st June 2026
                 </span>
 
               </div>
@@ -272,39 +331,15 @@ function App() {
               <div className="nikah-venue-box">
 
                 <p className="nikah-detail">
-                  <strong>Nikah :</strong> After Zohar,
+                  <strong>Nikah :</strong> After Zohar
                 </p>
 
                 <p className="nikah-detail">
-                  at Masjid-e-Suffah Ahle Hadees,
+                  Masjid-e-Suffah Ahle Hadees
                 </p>
 
                 <p className="nikah-detail">
-                  Moin Bagh Road, Riyasat Nager, Hyd.
-                </p>
-
-              </div>
-
-              <p className="nikah-dinner">
-                Dinner: 9:00 p.m.
-              </p>
-
-              <div className="nikah-venue-box">
-
-                <p className="nikah-detail">
-                  <strong>O R. PALACE,</strong>
-                </p>
-
-                <p className="nikah-detail">
-                  Beside White Palace,
-                </p>
-
-                <p className="nikah-detail">
-                  Opp. Moghal Engineering College,
-                </p>
-
-                <p className="nikah-detail">
-                  Bandlaguda, Hyd.
+                  Riyasat Nagar, Hyderabad
                 </p>
 
               </div>
@@ -315,23 +350,25 @@ function App() {
               With best compliments from : Near & Dear
             </p>
 
-            <div className="bottom-border-ornament"></div>
-
           </div>
 
-          {/* Mute Button */}
+          {/* MUTE BUTTON */}
+
           <button
             className="mute-button"
-            title={muted ? 'Unmute audio' : 'Mute audio'}
             onClick={() => setMuted(!muted)}
           >
             {muted ? '🔇' : '🔊'}
           </button>
 
         </div>
+
       )}
+
     </div>
+
   );
+
 }
 
 export default App;
