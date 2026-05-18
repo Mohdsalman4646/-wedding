@@ -60,9 +60,9 @@ function App() {
       // Open curtains after invitation mounts
       setTimeout(() => {
         setCurtainOpen(true);
-      }, 200);
+      }, 500);
 
-    }, 1000);
+    }, 1200);
 
   };
 
@@ -174,15 +174,27 @@ function App() {
 
         <div className="invitation-screen">
 
-          {/* Curtains */}
+        
+  {/* LEFT CURTAIN */}
+  <div
+    className={`curtain left ${
+      curtainOpen ? 'opened' : ''
+    }`}
+  ></div>
 
-          <div className={`curtain left ${curtainOpen ? 'opened' : ''}`}></div>
+  {/* RIGHT CURTAIN */}
+  <div
+    className={`curtain right ${
+      curtainOpen ? 'opened' : ''
+    }`}
+  ></div>
 
-          <div className={`curtain right ${curtainOpen ? 'opened' : ''}`}></div>
-
-          {/* Invitation */}
-
-          <div className={`invitation-card ${curtainOpen ? 'open-vertical' : ''}`}>
+  {/* INVITATION */}
+  <div
+    className={`invitation-card ${
+      curtainOpen ? 'open-vertical' : ''
+    }`}
+  >
 
             <div className="full-bismillah">
               بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
@@ -292,7 +304,17 @@ function App() {
 
             {/* Venue */}
 
-            <div className="event-box">
+            <a 
+              href="https://maps.app.goo.gl/v34a86tiNKjWUPC8A?g_st=awb"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="event-box venue-link"
+            >
+
+              <svg className="venue-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
 
               <p className="venue-location">
                 At : WHITE PALACE
@@ -306,7 +328,7 @@ function App() {
                 Bandlaguda, Hyderabad
               </p>
 
-            </div>
+            </a>
 
             {/* Nikah */}
 
@@ -328,7 +350,17 @@ function App() {
 
               </div>
 
-              <div className="nikah-venue-box">
+              <a
+                href="https://maps.app.goo.gl/ZkwNBvu5RTxP7r2XA?g_st=awb"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="nikah-venue-link"
+              >
+
+                <svg className="venue-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
 
                 <p className="nikah-detail">
                   <strong>Nikah :</strong> After Zohar
@@ -342,7 +374,35 @@ function App() {
                   Riyasat Nagar, Hyderabad
                 </p>
 
+              </a>
+
+              <div>
+                <p className="nikah-dinner-box">
+                  <strong>DINNER:9:00PM</strong>
+                </p>
+
+                <p className="nikah-dinner">
+                  O.R. PALACE,
+                </p>
+                
+                <p className="nikah-dinner">
+                  Beside White Palace,
+                </p>
+                
+                <p className="nikah-dinner">
+                  Opp.Moghal
+                </p>
+                
+                <p className="nikah-dinner">
+                  Engineering College,
+                </p>
+                
+                <p className="nikah-dinner">
+                  Bandlaguda, Hyd.
+                </p>
+
               </div>
+              
 
             </div>
 

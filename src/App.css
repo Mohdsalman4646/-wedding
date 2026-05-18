@@ -69,8 +69,7 @@ body {
 
   transform-origin: center top;
 
-  animation:
-    welcomeClose 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: welcomeClose 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 @keyframes welcomeClose {
@@ -211,74 +210,89 @@ body {
   text-align: center;
   backdrop-filter: blur(30px);
   -webkit-backdrop-filter: blur(20px);
+  opacity: 0;
 }
 
 /* Vertical open animation (scale Y from top) */
 /* Cinematic Vertical Opening */
+
+/* Ultra Smooth Cinematic Opening */
+
+/* Smooth Luxury Invitation Opening */
 
 .invitation-card.open-vertical {
 
   transform-origin: center top;
 
   animation:
-    verticalOpen 1.4s cubic-bezier(0.22,1,0.36,1) forwards;
+    smoothLuxuryOpen 1.5s ease-in-out forwards;
 
   will-change: transform, opacity;
 
   backface-visibility: hidden;
 }
 
-@keyframes verticalOpen {
+@keyframes smoothLuxuryOpen {
 
   0% {
 
     transform:
-      perspective(1400px)
-      rotateX(-90deg)
-      scaleY(0.1);
+      translateY(80px)
+      scale(0.96);
 
     opacity: 0;
-
-    filter: blur(12px);
   }
 
-  40% {
+  25% {
+
+    opacity: 0.25;
 
     transform:
-      perspective(1400px)
-      rotateX(-20deg)
-      scaleY(1.03);
-
-    opacity: 1;
+      translateY(50px)
+      scale(0.975);
   }
 
-  70% {
+  50% {
+
+    opacity: 0.6;
 
     transform:
-      perspective(1400px)
-      rotateX(4deg)
-      scaleY(1.01);
+      translateY(25px)
+      scale(0.988);
+  }
+
+  75% {
+
+    opacity: 0.9;
+
+    transform:
+      translateY(8px)
+      scale(1.002);
   }
 
   100% {
 
     transform:
-      perspective(1400px)
-      rotateX(0deg)
-      scaleY(1);
+      translateY(0px)
+      scale(1);
 
     opacity: 1;
-
-    filter: blur(0px);
   }
 }
 
 /* Curtain reveal effect: two side panels that slide outwards to reveal center */
 .invitation-screen {
-  --curtain-gap: 80px; /* visible center strip width */
+  --curtain-gap: 80px;
+  perspective: 1200px; /* visible center strip width */
 }
 
 /* Cinematic Curtains */
+
+/* Premium Center Opening Curtains */
+
+/* =========================================
+   LUXURY CINEMATIC CURTAINS
+========================================= */
 
 .curtain {
 
@@ -286,53 +300,187 @@ body {
 
   top: 0;
 
-  width: 50%;
+  width: 50vw;
 
-  height: 100%;
+  height: 100vh;
 
-  z-index: 100;
+  z-index: 999;
+
+  overflow: hidden;
 
   pointer-events: none;
 
+  transition:
+    transform 3.5s cubic-bezier(0.19, 1, 0.22, 1),
+    opacity 2.5s ease;
+
+  will-change: transform;
+
   background:
     linear-gradient(
-      90deg,
-      rgba(0,0,0,0.98) 0%,
-      rgba(20,20,20,0.95) 35%,
-      rgba(80,60,10,0.7) 100%
+      to right,
+      #020617 0%,
+      #081225 25%,
+      #0f172a 45%,
+      rgba(212,175,55,0.22) 100%
     );
 
-  backdrop-filter: blur(10px);
+  box-shadow:
+    inset 0 0 80px rgba(0,0,0,0.95),
+    inset -10px 0 35px rgba(212,175,55,0.15);
 
-  transition:
-    transform 1.5s cubic-bezier(0.22,1,0.36,1),
-    opacity 1s ease;
+  backdrop-filter: blur(6px);
 }
+
+/* GOLD GLOW */
+
+.curtain::before {
+
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+
+  width: 3px;
+
+  height: 100%;
+
+  background:
+    linear-gradient(
+      to bottom,
+      transparent,
+      rgba(255,215,120,0.95),
+      transparent
+    );
+
+  box-shadow:
+    0 0 25px rgba(255,215,120,0.9),
+    0 0 45px rgba(255,215,120,0.5);
+}
+
+/* LEFT CURTAIN */
 
 .curtain.left {
+
   left: 0;
+
+  border-right:
+    1px solid rgba(255,215,120,0.18);
+
+  transform: translateX(0%);
 }
 
-.curtain.right {
+.curtain.left::before {
+
   right: 0;
 }
 
+/* RIGHT CURTAIN */
+
+.curtain.right {
+
+  right: 0;
+
+  border-left:
+    1px solid rgba(255,215,120,0.18);
+
+  transform: translateX(0%);
+}
+
+.curtain.right::before {
+
+  left: 0;
+}
+
+/* OPEN ANIMATION */
+
 .curtain.left.opened {
+
   transform: translateX(-100%);
-  opacity: 0;
 }
 
 .curtain.right.opened {
+
   transform: translateX(100%);
+}
+
+/* OPTIONAL FADE */
+
+.curtain.opened {
+
+  opacity: 0.12;
+}
+
+/* GOLD PARTICLES */
+
+.curtain::after {
+
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background-image:
+    radial-gradient(
+      rgba(255,215,120,0.18) 1px,
+      transparent 1px
+    );
+
+  background-size: 18px 18px;
+
+  opacity: 0.35;
+}
+
+/* =========================================
+   INVITATION CARD
+========================================= */
+
+.invitation-card {
+
+  position: relative;
+
+  z-index: 20;
+
   opacity: 0;
+
+  transform:
+    translateY(40px)
+    scale(0.97);
+
+  transition:
+    opacity 1.2s ease,
+    transform 1.5s ease;
+
+  overflow: hidden;
+
+  transform-style: preserve-3d;
+
+  box-shadow:
+    0 0 40px rgba(212,175,55,0.12),
+    0 20px 80px rgba(0,0,0,0.8);
 }
 
-@media (max-width: 480px) {
-  .invitation-screen {
-    --curtain-gap: 48px;
-  }
+/* OPEN STATE */
+
+.invitation-card.open-vertical {
+
+  opacity: 1;
+
+  transform:
+    translateY(0px)
+    scale(1);
 }
 
+/* =========================================
+   SCREEN PERSPECTIVE
+========================================= */
+
+.invitation-screen {
+
+  perspective: 1600px;
+}
 /* Top and bottom borders */
 .top-border-ornament,
 .bottom-border-ornament {
@@ -601,6 +749,89 @@ body {
   background: rgba(45, 90, 123, 0.3);
 }
 
+.venue-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border: 2px solid var(--gold);
+  border-radius: 10px;
+  padding: 30px 25px;
+  margin-bottom: 30px;
+  background: rgba(45, 90, 123, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.venue-link:hover {
+  background: rgba(212, 175, 55, 0.15);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(212, 175, 55, 0.25);
+  border-color: #d4af37;
+}
+
+.venue-link:active {
+  transform: translateY(-1px);
+}
+
+.nikah-venue-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  margin-bottom: 30px;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nikah-venue-link:hover {
+  transform: translateY(-2px);
+}
+
+.nikah-venue-link:hover .venue-icon {
+  animation: bounce 0.6s ease-in-out;
+}
+
+.nikah-venue-link:active {
+  transform: translateY(0);
+}
+
+.venue-icon {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 15px;
+  margin-top: 5px;
+  animation: slideDown 0.6s ease-out;
+  color: #d4af37;
+  stroke: currentColor;
+}
+
+.venue-link:hover .venue-icon {
+  animation: bounce 0.6s ease-in-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
 .event-label {
   font-size: 14px;
   letter-spacing: 1px;
@@ -671,6 +902,7 @@ body {
   border-top: 1px solid rgba(212, 175, 55, 0.3);
 }
 
+
 .nikah-venue-name {
   font-size: 16px;
   font-weight: bold;
@@ -701,9 +933,14 @@ body {
   letter-spacing: 1px;
   text-shadow: 0 0 8px rgba(240, 213, 117, 0.3);
 }
+.nikah-dinner-box {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(212, 175, 55, 0.3);
+}
 
 .nikah-dinner {
-  font-size: 16px;
+  font-size: 14px;
   color: #ffffff;
   font-weight: bold;
   margin: 15px 0;
@@ -789,17 +1026,28 @@ body {
 }
 
 /* ==================== RESPONSIVE DESIGN ==================== */
+
+/* Mobile-First: Ensure minimum touch target sizes */
+@media (max-width: 1200px) {
+  body {
+    font-size: 16px;
+  }
+}
+
 /* Tablet and Medium Screens */
 @media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+
   .invitation-card {
-
-  max-width: 650px;
-  width: 100%;
-
-  overflow: hidden;
-
-  transform-style: preserve-3d;
-}
+    max-width: 95%;
+    width: 100%;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    padding: 60px 30px;
+    margin: 20px auto;
+  }
 
   .welcome-container {
     padding: 40px 25px;
@@ -925,104 +1173,137 @@ body {
 }
 
 @media (max-width: 480px) {
+  html {
+    font-size: 13px;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+
   .invitation-card {
-    padding: 40px 15px;
-    margin: 10px;
+    padding: 35px 15px;
+    margin: 10px auto;
     border: 2px solid var(--gold);
-    border-radius: 10px;
+    border-radius: 8px;
+    max-width: 100%;
+    width: calc(100% - 20px);
   }
 
   .welcome-container {
-    padding: 30px 15px;
+    padding: 25px 15px;
     max-width: 100%;
-  }
-
-  .welcome-heading {
-    font-size: 28px;
-    margin-bottom: 12px;
-    font-family: 'Great Vibes', cursive;
-  }
-
-  .welcome-subtitle {
-    font-size: 13px;
-    margin-bottom: 30px;
-  }
-
-  .bismillah-welcome {
-    font-size: 20px;
-    margin-bottom: 15px;
+    margin: 0 10px;
+    border-radius: 12px;
   }
 
   .input-container {
-    padding: 10px 12px;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    border-radius: 40px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
   }
 
   .search-icon {
-    font-size: 16px;
+    font-size: 18px;
     margin-right: 10px;
   }
 
   .name-input {
+    font-size: 14px;
+    padding: 8px 0;
+  }
+
+  .welcome-heading {
+    font-size: 26px;
+    margin-bottom: 12px;
+    font-family: 'Great Vibes', cursive;
+    line-height: 1.2;
+  }
+
+  .welcome-subtitle {
     font-size: 12px;
+    margin-bottom: 25px;
+    line-height: 1.4;
+  }
+
+  .bismillah-welcome {
+    font-size: 18px;
+    margin-bottom: 15px;
   }
 
   .enter-button {
-    padding: 10px 25px;
+    padding: 12px 25px;
     font-size: 14px;
     letter-spacing: 1px;
+    min-height: 44px;
+    border-radius: 40px;
+    font-weight: bold;
+    width: 100%;
   }
 
   .parents-name {
-    font-size: 18px;
-    margin-bottom: 20px;
+    font-size: 16px;
+    margin-bottom: 15px;
     font-family: 'Great Vibes', cursive;
   }
 
   .groom-name {
-    font-size: 20px;
-    margin: 15px 0 8px 0;
+    font-size: 18px;
+    margin: 12px 0 8px 0;
     font-family: 'Great Vibes', cursive;
+    word-break: break-word;
   }
 
   .full-bismillah {
-    font-size: 20px;
+    font-size: 18px;
     margin-bottom: 8px;
     font-family: 'Great Vibes', cursive;
+    direction: rtl;
+  }
+
+  .bismillah-english {
+    font-size: 12px;
+    line-height: 1.4;
   }
 
   .event-type {
-    font-size: 16px;
-    margin: 15px 0;
+    font-size: 14px;
+    margin: 12px 0;
     font-family: 'Great Vibes', cursive;
   }
 
   .invitation-text {
-    font-size: 13px;
+    font-size: 12px;
     line-height: 1.5;
+    margin: 10px 0;
   }
 
   .profession {
-    font-size: 12px;
-    margin-bottom: 15px;
+    font-size: 11px;
+    margin-bottom: 12px;
   }
 
   .with-text {
-    font-size: 13px;
-    margin: 15px 0;
+    font-size: 12px;
+    margin: 12px 0;
   }
 
   .daughter-text {
-    font-size: 13px;
+    font-size: 12px;
+    margin: 8px 0;
   }
 
   .father-name {
-    font-size: 14px;
-    margin-bottom: 15px;
+    font-size: 13px;
+    margin-bottom: 12px;
   }
 
   .insha-allah {
-    font-size: 14px;
-    margin: 15px 0;
+    font-size: 13px;
+    margin: 12px 0;
     font-family: 'Great Vibes', cursive;
   }
 
@@ -1034,62 +1315,72 @@ body {
   }
 
   .top-border-ornament {
-    top: 15px;
+    top: 12px;
   }
 
   .bottom-border-ornament {
-    bottom: 15px;
+    bottom: 12px;
   }
 
   .separator-line {
-    width: 60px;
-    margin: 15px auto 20px;
+    width: 50px;
+    margin: 12px auto 15px;
+    height: 1px;
   }
 
   .mute-button {
-    width: 40px;
-    height: 40px;
-    font-size: 16px;
+    width: 44px;
+    height: 44px;
+    font-size: 18px;
     bottom: 15px;
     right: 15px;
+    min-width: 44px;
+    min-height: 44px;
   }
 
   .venue-name {
-    font-size: 14px;
+    font-size: 13px;
   }
 
   .venue-location {
-    font-size: 12px;
-    line-height: 1.5;
+    font-size: 11px;
+    line-height: 1.4;
+    margin: 4px 0;
   }
 
   .nikah-title {
-    font-size: 14px;
+    font-size: 13px;
   }
 
   .nikah-detail {
-    font-size: 12px;
+    font-size: 11px;
+    margin: 4px 0;
   }
 
-  .nikah-date-section {
-    margin: 12px 0;
-  }
-
-  .nikah-date-text {
-    font-size: 12px;
-  }
-
-  .nikah-date-day {
-    font-size: 14px;
+  .nikah-dinner-box {
+    font-size: 11px;
+    margin: 8px 0;
   }
 
   .nikah-dinner {
-    font-size: 13px;
-    margin: 12px 0;
+    font-size: 11px;
+    margin: 4px 0;
+  }
+
+  .nikah-date-section {
+    margin: 10px 0;
+  }
+
+  .nikah-date-text {
+    font-size: 11px;
+  }
+
+  .nikah-date-day {
+    font-size: 12px;
   }
 
   .date-section {
-    margin: 20px 0 15px 0;
+    margin: 15px 0 12px 0;
   }
 
   .date-row {
@@ -1100,92 +1391,154 @@ body {
 
   .date-left,
   .date-right {
-    font-size: 12px;
+    font-size: 11px;
   }
 
   .date-box {
-    padding: 8px 12px;
+    padding: 6px 10px;
+    border-radius: 4px;
   }
 
   .date-day-large {
-    font-size: 20px;
-    letter-spacing: 1px;
+    font-size: 18px;
+    letter-spacing: 0.5px;
   }
 
   .hijri-date {
-    font-size: 12px;
+    font-size: 11px;
     margin-bottom: 8px;
   }
 
   .dinner-time {
-    font-size: 14px;
-    margin-bottom: 25px;
-  }
-
-  .blessings-heading {
-    font-size: 13px;
-    margin-top: 25px;
-    margin-bottom: 10px;
-  }
-
-  .blessings-names {
     font-size: 12px;
-    line-height: 1.6;
-  }
-
-  .event-box {
-    padding: 20px 15px;
     margin-bottom: 20px;
   }
 
-  .event-label {
+  .blessings-heading {
     font-size: 12px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+
+  .blessings-names {
+    font-size: 11px;
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
+
+  .event-box {
+    padding: 15px 12px;
     margin-bottom: 15px;
+    border-radius: 8px;
+  }
+
+  .venue-link {
+    padding: 15px 12px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+  }
+
+  .venue-icon {
+    width: 32px;
+    height: 32px;
+    margin-bottom: 12px;
+  }
+
+  .event-label {
+    font-size: 11px;
+    margin-bottom: 12px;
+  }
+
+  .nikah-box {
+    padding: 15px 12px;
+  }
+
+  .nikah-venue-link {
+    margin-bottom: 20px;
+  }
+
+  .nikah-venue-box {
+    margin-top: 12px;
+    padding-top: 12px;
   }
 }
 
 /* Extra small screens */
 @media (max-width: 360px) {
+  html {
+    font-size: 12px;
+  }
+
   .invitation-card {
-    padding: 30px 10px;
+    padding: 25px 10px;
+    margin: 5px auto;
+    max-width: 100%;
   }
 
   .welcome-container {
-    padding: 25px 10px;
+    padding: 20px 10px;
+    margin: 0 5px;
+  }
+
+  .input-container {
+    padding: 10px 12px;
+    min-height: 44px;
+    margin-bottom: 12px;
   }
 
   .welcome-heading {
-    font-size: 22px;
+    font-size: 20px;
     letter-spacing: 0.5px;
     font-family: 'Great Vibes', cursive;
+    margin-bottom: 10px;
+  }
+
+  .welcome-subtitle {
+    font-size: 11px;
+    margin-bottom: 20px;
+  }
+
+  .bismillah-welcome {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+
+  .enter-button {
+    padding: 10px 20px;
+    font-size: 13px;
+    min-height: 44px;
+    width: 100%;
   }
 
   .groom-name {
-    font-size: 18px;
-    font-family: 'Great Vibes', cursive;
-  }
-
-  .parents-name {
     font-size: 16px;
     font-family: 'Great Vibes', cursive;
   }
 
+  .parents-name {
+    font-size: 14px;
+    font-family: 'Great Vibes', cursive;
+  }
+
   .full-bismillah {
-    font-size: 18px;
+    font-size: 16px;
     font-family: 'Great Vibes', cursive;
   }
 
   .event-type {
-    font-size: 14px;
+    font-size: 13px;
     font-family: 'Great Vibes', cursive;
   }
 
   .mute-button {
-    width: 35px;
-    height: 35px;
-    font-size: 14px;
+    width: 44px;
+    height: 44px;
+    font-size: 18px;
     bottom: 10px;
     right: 10px;
+    min-width: 44px;
+    min-height: 44px;
   }
 
   .nikah-title {
@@ -1193,18 +1546,111 @@ body {
   }
 
   .nikah-date-text {
-    font-size: 11px;
+    font-size: 10px;
   }
 
   .nikah-date-day {
-    font-size: 12px;
+    font-size: 11px;
   }
 
   .nikah-dinner {
-    font-size: 12px;
+    font-size: 10px;
   }
 
   .nikah-detail {
+    font-size: 10px;
+  }
+
+  .date-day-large {
+    font-size: 16px;
+  }
+
+  .separator-line {
+    width: 40px;
+  }
+
+  .venue-icon {
+    width: 28px;
+    height: 28px;
+    margin-bottom: 10px;
+  }
+}
+
+/* Ultra small screens (320px and below) */
+@media (max-width: 320px) {
+  html {
     font-size: 11px;
+  }
+
+  .invitation-card {
+    padding: 20px 8px;
+  }
+
+  .welcome-container {
+    padding: 18px 8px;
+  }
+
+  .welcome-heading {
+    font-size: 18px;
+  }
+
+  .groom-name {
+    font-size: 14px;
+  }
+
+  .enter-button {
+    padding: 10px 15px;
+    font-size: 12px;
+  }
+
+  .venue-icon {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 8px;
+  }
+}
+
+/* Landscape orientation mobile */
+@media (max-height: 600px) and (orientation: landscape) {
+  .welcome-screen {
+    min-height: auto;
+    padding: 20px;
+  }
+
+  .welcome-container {
+    padding: 20px 15px;
+  }
+
+  .welcome-heading {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .welcome-subtitle {
+    font-size: 12px;
+    margin-bottom: 15px;
+  }
+
+  .invitation-card {
+    padding: 20px 15px;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .enter-button,
+  .mute-button {
+    min-height: 48px;
+    min-width: 48px;
+  }
+
+  .enter-button:active {
+    transform: scale(0.98);
+  }
+
+  button {
+    -webkit-tap-highlight-color: rgba(212, 175, 55, 0.2);
   }
 }
